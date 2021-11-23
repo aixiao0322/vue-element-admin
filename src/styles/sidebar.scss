@@ -1,4 +1,18 @@
 
+$menuText:#ffffff;
+$menuActiveText:#409EFF;
+$subMenuActiveText:#f4f4f5; // https://github.com/ElemeFE/element/issues/12951
+
+$menuBg: transparent;
+$menuHover:#ffffff;
+
+
+
+$subMenuBg:#1f2d3d;
+$subMenuHover:#001528;
+
+$sideBarWidth: 210px;
+
 #app {
   .main-container {
     min-height: 100%;
@@ -8,7 +22,7 @@
   }
 
   .sidebar-container {
-    background: url('~@/assets/common/leftnavBg.png') no-repeat 0 100%;
+    background: -webkit-linear-gradient(bottom, #3d6df8, #5b8cff);
     transition: width 0.28s;
     width: $sideBarWidth !important;
     background-color: $menuBg;
@@ -28,6 +42,8 @@
 
     .scrollbar-wrapper {
       overflow-x: hidden !important;
+     
+      background: url('~@/assets/common/leftnavBg.png') no-repeat 0 100%;
     }
 
     .el-scrollbar__bar.is-vertical {
@@ -117,6 +133,7 @@
 
   .hideSidebar {
     .sidebar-container {
+      background: -webkit-linear-gradient(bottom, #3d6df8, #5b8cff);
       width: 54px !important;
     }
 
