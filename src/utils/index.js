@@ -24,7 +24,7 @@ export function parseTime (time, cFormat) {
       } else {
         // support safari
         // https://stackoverflow.com/questions/4310953/invalid-date-in-safari
-        time = time.replace(new RegExp(/-/gm), '/')
+        time = time.replace(/-/gm, '/')
       }
     }
 
@@ -114,4 +114,22 @@ export function param2Obj (url) {
     }
   })
   return obj
+}
+
+// .......树型转化
+// 递归算法
+export function tranListToTreeData (list, rootValue) {
+  var arr = []
+  list.forEach(item => {
+    if (item.pid === rootValue) {
+      const children = tranListToTreeData(list, item.id)
+      if (children.length) {
+        // 如果children的长度大于0 说明找到了子节点
+        item.children = children
+      }
+      // 将内容加入到数组中
+      arr.push(item)
+    }
+  })
+  return arr
 }

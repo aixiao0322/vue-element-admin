@@ -39,7 +39,7 @@
           </router-link>
           <a
             target="_blank"
-            href="https://gitee.com/shuiruohanyu/hrsaas53"
+            href="https://gitee.com/aixiao0322/vue-element-admin"
           >
             <el-dropdown-item>项目地址</el-dropdown-item>
           </a>
