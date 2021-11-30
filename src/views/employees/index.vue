@@ -49,6 +49,7 @@
                 :src="row.staffPhoto"
                 style="border-radius: 50%; width: 100px; height: 100px; padding: 10px"
                 alt=""
+                @click="showQrCode(row.staffPhoto)"
               >
             </template>
             <!-- /员工头像 -->
@@ -142,6 +143,20 @@
     </div>
     <!-- 新增组件 -->
     <add-employee :show-dialog.sync="showDialog" />
+    <!-- 生成二维码 -->
+    <el-dialog
+      title="二维码"
+      :visible.sync="showCodeDialog"
+    >
+      <el-row
+        type="flex"
+        justify="center"
+      >
+        <canvas ref="myCanvas" />
+      </el-row>
+    </el-dialog>
+    <!--/ 生成二维码 -->
+
   </div>
 </template>
 
@@ -150,10 +165,12 @@ import { getEmployeeList, delEmployee } from '@/api/employees'
 import EmployeeEnum from '@/api/constant/employees'
 import AddEmployee from './components/add-employee.vue'
 import { formatDate } from '@/filters'
+import QrCode from 'qrcode'
 export default {
   components: { AddEmployee },
   data () {
     return {
+      showCodeDialog: false,
       loading: false,
       // 数据
       list: [],
@@ -237,6 +254,16 @@ export default {
           return item[headers[key]]
         })
       })
+    },
+    showQrCode (url) {
+      if (url) {
+        this.showCodeDialog = true
+        this.$nextTick(() => {
+          QrCode.toCanvas(this.$refs.myCanvas, url)
+        })
+      } else {
+        this.$message.warning('该用户还未上传头像')
+      }
     }
   }
 }

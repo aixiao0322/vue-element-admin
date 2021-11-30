@@ -172,6 +172,7 @@
 import { getRoleList, getCompanyInfo, deleteRole, updateRole, getRoleDetail, addRole } from '@/api/setting'
 import { mapGetters } from 'vuex'
 export default {
+
   data () {
     return {
       showDialog: false,
@@ -189,6 +190,12 @@ export default {
       formData: {
 
       }
+    }
+  },
+  computed: {
+    ...mapGetters(['companyId']),
+    showTitle () {
+      return this.roleForm.id ? '编辑角色' : '新增角色'
     }
   },
   created () {
@@ -252,12 +259,6 @@ export default {
       // 移除校验
       this.$refs.roleForm.resetFields()
       this.showDialog = false
-    }
-  },
-  computed: {
-    ...mapGetters(['companyId']),
-    showTitle () {
-      return this.roleForm.id ? '编辑角色' : '新增角色'
     }
   }
 }
