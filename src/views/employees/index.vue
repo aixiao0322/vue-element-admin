@@ -37,6 +37,22 @@
             sortable=""
             prop="username"
           />
+          <!--员工头像  -->
+          <el-table-column
+            label="头像"
+            align="center"
+          >
+            <template slot-scope="{row}">
+              <img
+                slot="reference"
+                v-imagerror="require('@/assets/common/bigUserHeader.png')"
+                :src="row.staffPhoto"
+                style="border-radius: 50%; width: 100px; height: 100px; padding: 10px"
+                alt=""
+              >
+            </template>
+            <!-- /员工头像 -->
+          </el-table-column>
           <el-table-column
             label="工号"
             sortable=""
@@ -81,6 +97,7 @@
               <el-button
                 type="text"
                 size="small"
+                @click="$router.push('/employees/detail/${row.id}`')"
               >查看</el-button>
               <el-button
                 type="text"
@@ -184,8 +201,8 @@ export default {
     },
     exportData () {
       const headers = {
-        '手机号': 'mobile',
         '姓名': 'username',
+        '手机号': 'mobile',
         '入职日期': 'timeOfEntry',
         '聘用形式': 'formOfEmployment',
         '转正日期': 'correctionTime',
@@ -195,12 +212,16 @@ export default {
       import('@/vendor/Export2Excel').then(async excel => {
         const { rows } = await getEmployeeList({ page: 1, size: this.page.total })
         const data = this.formatJson(headers, rows)
+        const multiHeader = [['姓名', '主要信息', '', '', '', '', '部门']]
+        const merges = ['A1:A2', 'B1:F1', 'G1:G2']
         excel.export_json_to_excel({
           header: Object.keys(headers), // 表头 必填
           data, // 具体数据 必填
           filename: '员工信息表', // 非必填
-          autoWidth: true, // 非必填
-          bookType: 'xlsx' // 非必填
+          multiHeader,
+          merges
+          // autoWidth: true, // 非必填
+          // bookType: 'xlsx' // 非必填
         })
       })
     },
