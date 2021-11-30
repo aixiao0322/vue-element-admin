@@ -43,10 +43,30 @@
             </el-form>
           </el-tab-pane>
           <el-tab-pane label="个人详情">
+            <el-row
+              type="flex"
+              justify="end"
+            >
+              <el-button
+                v-print="printObj"
+                size="small"
+                type="primary"
+              >打印</el-button>
+            </el-row>
             <!-- 设置个人详情 -->
             <component :is="UserComponent" />
           </el-tab-pane>
           <el-tab-pane label="岗位信息">
+            <el-row
+              type="flex"
+              justify="end"
+            >
+              <el-button
+                v-print="printObj"
+                size="small"
+                type="primary"
+              >打印</el-button>
+            </el-row>
             <!-- 放置岗位详情 -->
             <component :is="JobComponent" />
           </el-tab-pane>
