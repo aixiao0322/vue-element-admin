@@ -47,11 +47,11 @@
               type="flex"
               justify="end"
             >
-              <el-button
-                v-print="printObj"
-                size="small"
-                type="primary"
-              >打印</el-button>
+              <el-tooltip content="打印个人基本信息">
+                <router-link :to="`/employees/print/${userId}?type=personal`">
+                  <i class="el-icon-printer" />
+                </router-link>
+              </el-tooltip>
             </el-row>
             <!-- 设置个人详情 -->
             <component :is="UserComponent" />
@@ -61,11 +61,11 @@
               type="flex"
               justify="end"
             >
-              <el-button
-                v-print="printObj"
-                size="small"
-                type="primary"
-              >打印</el-button>
+              <el-tooltip content="打印岗位信息">
+                <router-link :to="`/employees/print/${userId}?type=job`">
+                  <i class="el-icon-printer" />
+                </router-link>
+              </el-tooltip>
             </el-row>
             <!-- 放置岗位详情 -->
             <component :is="JobComponent" />
@@ -86,6 +86,7 @@ export default {
   components: { userInfo, JobInfo },
   data () {
     return {
+
       UserComponent: 'user-info',
       JobComponent: 'job-info',
       userId: this.$route.params.id,

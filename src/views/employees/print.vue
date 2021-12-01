@@ -15,6 +15,16 @@
           </el-breadcrumb-item>
           <el-breadcrumb-item>打印</el-breadcrumb-item>
         </el-breadcrumb>
+        <el-row
+          type="flex"
+          justify="end"
+        >
+          <el-button
+            v-print="printObj"
+            size="small"
+            type="primary"
+          >打印</el-button>
+        </el-row>
         <div v-if="type === 'personal'">
           <h2 class="centInfo">员工信息表</h2>
           <table
@@ -388,6 +398,9 @@ import { getUserDetailById } from '@/api/user'
 export default {
   data () {
     return {
+      printObj: {
+        id: 'myPrint'
+      },
       formData: {},
       userId: this.$route.params.id,
       type: this.$route.query.type // 打印类型

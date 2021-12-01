@@ -42,7 +42,7 @@
             label="头像"
             align="center"
           >
-            <template slot-scope="{row}">
+            <template v-slot="{row}">
               <img
                 slot="reference"
                 v-imagerror="require('@/assets/common/bigUserHeader.png')"
@@ -84,7 +84,7 @@
             sortable=""
             prop="enableState"
           >
-            <template slot-scope="{row}">
+            <template v-slot="{row}">
               <el-switch :value="row.enableState === 1" />
             </template>
           </el-table-column>
@@ -94,11 +94,11 @@
             fixed="right"
             width="280"
           >
-            <template slot-scope="{row}">
+            <template v-slot="{row}">
               <el-button
                 type="text"
                 size="small"
-                @click="$router.push('/employees/detail/${row.id}`')"
+                @click="$router.push(`/employees/detail/${row.id}`)"
               >查看</el-button>
               <el-button
                 type="text"
@@ -115,7 +115,9 @@
               <el-button
                 type="text"
                 size="small"
+                @click="editRole(row.id)"
               >角色</el-button>
+
               <el-button
                 type="text"
                 size="small"
@@ -156,7 +158,13 @@
       </el-row>
     </el-dialog>
     <!--/ 生成二维码 -->
-
+    <!--  -->
+    <assign-role
+      ref="assignRole"
+      :show-role-dialog.sync="showRoleDialog"
+      :user-id="userId"
+    />
+    <!--  -->
   </div>
 </template>
 
@@ -164,12 +172,16 @@
 import { getEmployeeList, delEmployee } from '@/api/employees'
 import EmployeeEnum from '@/api/constant/employees'
 import AddEmployee from './components/add-employee.vue'
+import AssignRole from './components/assign-role.vue'
 import { formatDate } from '@/filters'
 import QrCode from 'qrcode'
+
 export default {
-  components: { AddEmployee },
+  components: { AddEmployee, AssignRole },
   data () {
     return {
+      showRoleDialog: false,
+      userId: null,
       showCodeDialog: false,
       loading: false,
       // 数据
@@ -264,6 +276,11 @@ export default {
       } else {
         this.$message.warning('该用户还未上传头像')
       }
+    },
+    async editRole (id) {
+      this.userId = id
+      await this.$refs.assignRole.getUserDetailById(id)
+      this.showRoleDialog = true
     }
   }
 }
