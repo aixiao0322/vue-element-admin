@@ -200,6 +200,7 @@ export default {
         timeOfEntry: '',
         correctionTime: ''
       }
+      this.showTree = false
       this.$refs.addEmployee.resetFields()
       this.$emit('update:showDialog', false)
     }

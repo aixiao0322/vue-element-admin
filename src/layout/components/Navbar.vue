@@ -8,10 +8,16 @@
     <div class="app-breadcrumb">
       江苏传智播客教育科技股份有限公司
       <span class="breadBtn">体验版</span>
-    </div>
-    <!-- <breadcrumb class="breadcrumb-container" /> -->
-
+    </div>\
+    <!--  -->
+    <breadcrumb class="breadcrumb-container" />
+    <!--  -->
     <div class="right-menu">
+      <lang class="right-menu-item" />
+      <theme-picker class="right-menu-item" />
+      <screen-full class="right-menu-item" />
+
+      <!--  -->
       <el-dropdown
         class="avatar-container"
         trigger="click"
@@ -52,18 +58,22 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
+    <!--  -->
+    <!-- <screen-full class="right-menu-item" /> -->
+    <!--  -->
+
   </div>
 </template>
 
 <script>
 import { mapGetters, createNamespacedHelpers } from 'vuex'
-// import Breadcrumb from '@/components/Breadcrumb'
+import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 const { mapActions } = createNamespacedHelpers('user')
 
 export default {
   components: {
-    // Breadcrumb,
+    Breadcrumb,
     Hamburger
   },
   data () {
@@ -145,12 +155,13 @@ export default {
     }
 
     .right-menu-item {
+      vertical-align: middle;
       display: inline-block;
       padding: 0 8px;
       height: 100%;
       font-size: 18px;
       color: #5a5e66;
-      vertical-align: text-bottom;
+      vertical-align: middle;
 
       &.hover-effect {
         cursor: pointer;

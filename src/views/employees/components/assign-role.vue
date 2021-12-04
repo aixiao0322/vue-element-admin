@@ -12,7 +12,7 @@
         :key="item.id"
         :label="item.id"
       >
-        {{ item.id }}
+        {{ item.name }}
       </el-checkbox>
     </el-checkbox-group>
     <el-row

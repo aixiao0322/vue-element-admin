@@ -1,6 +1,6 @@
 import { login, getUserInfo, getUserDetailById } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
-// import { resetRouter } from '@/router'
+import { resetRouter } from '@/router'
 
 // 状态
 const state = {
@@ -50,6 +50,9 @@ const actions = {
     context.commit('removeToken') // 不仅仅删除了vuex中的 还删除了缓存中的
     // 删除用户资料
     context.commit('removeUserInfo') // 删除用户信息
+    resetRouter()
+    context.commit('permission/setRoutes', [], { root: true })
+    context.dispatch('tagsView/delAllViews', null, { root: true })
   }
 }
 

@@ -19,7 +19,16 @@ import * as directives from '@/directives'
 import Print from 'vue-print-nb'
 Vue.use(Print)
 //
+//
+import checkPermission from '@/mixin/checkPermission'
+Vue.mixin(checkPermission)
+//
 import Component from '@/components'
+//
+import i18n from '@/lang'
+Vue.use(ElementUI, {
+  i18n: (key, value) => i18n.t(key, value)
+})
 // ...........
 import * as filters from '@/filters' // 引入工具类
 Object.keys(filters).forEach(key => {
@@ -42,6 +51,7 @@ new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   render: h => h(App)
 })
 
